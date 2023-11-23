@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+
 from Person.models import Person
 
 
@@ -19,14 +20,21 @@ class Event(models.Model):
     image = models.ImageField(null=True)
     state = models.BooleanField(default=False)
     nbr_participants = models.IntegerField(default=0)
-    evt_datee = models.DateTimeField(null=True)
+    evt_date = models.DateTimeField(null=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     organisateur = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True)
     participant = models.ManyToManyField(Person, through="Participants", related_name="participant")
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(
+                evt_date__gte=datetime.now()
+            ), name="Please check date event")
+        ]
+
     def __str__(self):
-        return self.title
+        return "title: " + self.title + " and state:" + str(self.state)
 
 
 class Participants(models.Model):
@@ -36,6 +44,7 @@ class Participants(models.Model):
 
     class Meta:
         unique_together = [['person', 'event']]
+        verbose_name = 'Participant'
 
     def __str__(self):
-        return self.participation_date
+        return str(self.participation_date)

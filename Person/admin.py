@@ -5,4 +5,5 @@ from .models import Person
 #admin.site.reegister(Person)
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("username","email","cin","last_login")
+    search_fields = ["username"]
