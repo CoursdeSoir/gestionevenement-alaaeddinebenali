@@ -17,7 +17,7 @@ class Event(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True, upload_to="images/")
     state = models.BooleanField(default=False)
     nbr_participants = models.IntegerField(default=0)
     evt_date = models.DateTimeField(null=True)
@@ -35,6 +35,7 @@ class Event(models.Model):
 
     def __str__(self):
         return "title: " + self.title + " and state:" + str(self.state)
+
 
 
 class Participants(models.Model):
