@@ -1,30 +1,42 @@
 {% extends 'index.html' %}
 
+{% block titlePage %}
+List Events
+{% endblock %}
 
 {% block body %}
+<a href="{% url 'addEvent' %}" class="btn btn-success">Add New Event</a>
+<div>
+    <h3> Nombre total des events = {{total_events}}</h3>
+</div>
+
 <div class="d-flex m-5 flex-wrap">
-    {% for p in events %}
+    {% if events %}
+    {% for event in events %}
 
     <div class="card mx-5" style="width: 18rem">
-        <img src="{{p.image.url}}" class="card-img-top" alt="..."/>
+        <img src="{{event.image.url}}" class="card-img-top" alt="..."/>
 
         <div class="card-body">
-            <h5 class="card-title">{{p.title}}</h5>
+            <h5 class="card-title">{{event.title | capfirst }}</h5>
 
-            <p class="card-text">{{p.description}}</p>
+            <p class="card-text">{{event.description}}</p>
 
-            <a href="" class="btn btn-primary">View Details</a>
-            <a href=" " class="btn btn-warning">Update</a>
+            <a href="{% url 'detailsEvent' event.id %}" class="btn btn-primary">View Details</a>
+            <a href="{% url 'updateEvent' event.id %}" class="btn btn-warning">Update</a>
 
-            <a href=" " class="btn btn-danger">Delete</a>
+            <a href="{% url 'classDeleteEvent' event.id %}" class="btn btn-danger">Delete</a>
 
         </div>
         <div class="card-footer">
-            <small class="text-muted">{{p.evt_date}}</small>
+            <small class="text-muted">{{event.evt_date | date:"D d M,Y"}}</small>
         </div>
     </div>
 
     {% endfor %}
+    {% else %}
+    <h1>No Events !</h1>
+    {% endif %}
 </div>
 {% endblock %}
 

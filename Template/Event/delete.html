@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block titlePage %}
+Delete Event
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block body %}
+
+<form action="" method="post">
+    <p class="danger"> Are you sure to delete this event ?</p>
+    {% csrf_token %}
+    {{form}}
+    <input class="btn btn-danger" type="submit" value="Delete">
+    <a href="{% url 'classListEvent' %}" class="btn btn-secondary" >Return to list Event</a>
+</form>
+{% endblock %}

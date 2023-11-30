@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block titlePage %}
+Add Event
+{% endblock %}
+
+{% block content %}
+<div
+        class="jumbotron jumbotron-fluid text-center"
+        style="background-color: rgb(55, 52, 52)"
+>
+    <div class="container py-5">
+        <h1 class="display-4 text-white">Add New Event</h1>>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block body %}
+
+
+<div class="container my-5 d-flex justify-content-center">
+    <form action="{% url 'addEvent' %}" method="post" c>
+
+        <table align="center">
+            {% csrf_token %}
+            {{form.as_table}}
+        </table>
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+</div>
+
+{{form.as_p}}
+
+
+{% endblock %}

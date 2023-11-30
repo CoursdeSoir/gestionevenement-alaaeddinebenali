@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block titlePage %}
+Details Events {{event.title}}
+{% endblock %}
+
+{% block content %}
+<div
+        class="jumbotron jumbotron-fluid text-center"
+        style="background-color: rgb(55, 52, 52)"
+>
+    <div class="container py-5">
+        <h1 class="display-4 text-white">{{event.title}}</h1>
+        <p class="lead text-white">
+            {{event.description}}
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="d-flex m-5 flex-wrap">
+    {% if event %}
+    <h5 class="card-title">{{event.title | capfirst }}</h5>
+
+    <p class="card-text">{{event.description}}</p>
+
+    <a href="" class="btn btn-primary">View Details</a>
+    <a href=" " class="btn btn-warning">Update</a>
+
+    <a href=" " class="btn btn-danger">Delete</a>
+
+    <div class="card-footer">
+        <small class="text-muted">{{event.evt_date | date:"D d M,Y"}}</small>
+    </div>
+
+
+    {% else %}
+    <h1>No Event found !</h1>
+    {% endif %}
+</div>
+{% endblock %}
